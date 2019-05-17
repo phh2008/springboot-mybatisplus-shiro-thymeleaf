@@ -83,15 +83,6 @@ public class ShiroConfig {
     }
 
     @Bean
-    public Map<String, Filter> filters(AdminAuthenticationFilter authFilter) {
-        Map<String, Filter> filters = new HashMap<>();
-        filters.put("authFilter", authFilter);
-        filters.put("anon", new AnonymousFilter());
-        filters.put("logout", new LogoutFilter());
-        return filters;
-    }
-
-    @Bean
     public AdminAuthorizingRealm adminAuthorizingRealm(CredentialsMatcher credentialsMatcher) {
         AdminAuthorizingRealm adminAuthorizingRealm = new AdminAuthorizingRealm();
         adminAuthorizingRealm.setCachingEnabled(true);
