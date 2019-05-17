@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+    <h2>这是 index 首页！
+        hello
+        <shiro:principal property="userName"/>
+        <span>版本： [[#{app.version}]]</span>
+    </h2>
+    <p><span th:text="'当前时间date：'+${#dates.format(date, 'yyyy-MM-dd HH:mm:ss')}"></span></p>
+    <p><span th:text="'当前时间localDateTime：'+${#temporals.format(newDate, 'yyyy-MM-dd HH:mm:ss')}"></span></p>
+    <p><a href="/mem/user/info">不需要权限</a></p>
+    <p shiro:lacksPermission="mem:user:del">sorry， you are not allowed to delete user accounts.</p>
+    <p shiro:hasPermission="mem:user:del">ok，you can delete accounts.</p>
+    <p><a href="/mem/user/del">需要权限</a></p>
+</div>
+</body>
+</html>
