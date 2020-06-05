@@ -31,8 +31,6 @@ public class SeqIdServiceImpl extends ServiceImpl<SeqIdMapper, SeqId> implements
     public synchronized String getOdrNo() {
         if (odrQueue.size() == 0) {
             LocalDate today = LocalDate.now();
-            System.out.println(">>>>>>today:" + today);
-            System.out.println(">>>>>>today:" + LocalDateTime.now());
             Integer bizType = 1;
             initSeqList(today, bizType, odrQueue);
         }
