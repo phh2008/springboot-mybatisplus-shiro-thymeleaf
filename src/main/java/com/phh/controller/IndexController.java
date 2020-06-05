@@ -1,11 +1,15 @@
 package com.phh.controller;
 
 import com.phh.entity.mem.User;
+import com.phh.event.StringEvent;
+import com.phh.service.mem.ISeqIdService;
 import com.phh.service.mem.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -22,6 +26,10 @@ public class IndexController extends BaseController {
 
     @Autowired
     private IUserService userService;
+    @Autowired
+    private ApplicationEventPublisher publisher;
+    @Autowired
+    private ISeqIdService seqIdService;
 
     /**
      * 首页
@@ -77,6 +85,21 @@ public class IndexController extends BaseController {
         User user = userService.query().one();
         model.addAttribute("user", user);
         return "/test";
+    }
+
+    @ResponseBody
+    @RequestMapping("/test2")
+    public User test2(String username) {
+
+        publisher.publishEvent(new StringEvent(this, username));
+
+        return userService.getByUsername(username);
+    }
+
+    @ResponseBody
+    @RequestMapping("/test3")
+    public String test3() {
+        return seqIdService.getOdrNo();
     }
 
 }

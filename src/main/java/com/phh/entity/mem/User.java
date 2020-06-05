@@ -2,13 +2,13 @@ package com.phh.entity.mem;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
-
-import java.time.LocalDateTime;
-
 import com.phh.entity.BaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import lombok.experimental.Accessors;
+
+import java.time.LocalDateTime;
 
 /**
  * @author phh
@@ -17,10 +17,13 @@ import lombok.experimental.Accessors;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
+@ToString
 @TableName("mem_user")
 public class User extends BaseEntity {
 
     private static final long serialVersionUID = 1L;
+
+    private Long id;
 
     private String username;
 
